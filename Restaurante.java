@@ -4,6 +4,8 @@ import personas.Administrador;
 import personas.Mesero;
 
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.File;
@@ -14,10 +16,21 @@ public class Restaurante{
         Scanner sc = new Scanner(System.in);
         ArrayList<Mesero> arrMeseros = new ArrayList<Mesero>();
         ArrayList<Administrador> arrAdmin = new ArrayList<Administrador>();
+        ArrayList<Mesa> arrMesas = new ArrayList<Mesa>();
+        Set<Mesa> mesasR = new HashSet<Mesa>();
+        Set<Mesa> disponibles = new HashSet<Mesa>();
+        Set<Mesa> ocupadas = new HashSet<Mesa>();
+        Set<Mesero> meserosR = new HashSet<Mesero>();
+        Set<Mesero> MeserosD = new HashSet<Mesero>();
+        Set<Mesero> MeserosO = new HashSet<Mesero>();
 
+        // Obtenemos informacion de administradores y meseros registrados
         try {
             File archivoA = new File("data/dataAdmin.ser");
             File archivoM = new File("data/dataMesero.ser");
+            File archivoMesas = new File("data/dataMesa.ser");
+
+            // Verificamos si existe el archivo de administradores
             if(archivoA.exists()){
                 FileInputStream f = new FileInputStream("data/dataAdmin.ser");
                 ObjectInputStream s = new ObjectInputStream(f); 
@@ -33,6 +46,8 @@ public class Restaurante{
                 Administrador adminDefault = new Administrador("raul123", "hola123","Raul", 20, "M", 5545656776l);
                 arrAdmin.add(adminDefault);
             }
+
+            // Verificamos si existe el archivo de meseros
             if(archivoM.exists()){
                 FileInputStream f = new FileInputStream("data/dataMesero.ser");
                 ObjectInputStream s = new ObjectInputStream(f); 
@@ -41,12 +56,41 @@ public class Restaurante{
                 for(int i=0; i<meseros.size();i++){
                     arrMeseros.add((Mesero) meseros.get(i));
                 }
+                meserosR.addAll(arrMeseros);
                 s.close();
                 
             }else{
-                archivoM.createNewFile();
-                
+                archivoM.createNewFile(); 
             }
+
+            // Verificamos si existe el archivo de mesas
+            if(archivoMesas.exists()){
+                FileInputStream f = new FileInputStream("data/dataMesa.ser");
+                ObjectInputStream s = new ObjectInputStream(f); 
+                ArrayList<?> mesas = (ArrayList<?>) s.readObject(); 
+                
+                for(int i=0; i<mesas.size();i++){
+                    arrMesas.add((Mesa) mesas.get(i));
+                }
+                mesasR.addAll(arrMesas);
+                s.close();
+                
+            }else{
+                archivoMesas.createNewFile(); 
+                Mesa mesa1 = new Mesa(1);
+                Mesa mesa2 = new Mesa(2);
+                Mesa mesa3 = new Mesa(3);
+                Mesa mesa4 = new Mesa(4);
+                Mesa mesa5 = new Mesa(5);
+                arrMesas.add(mesa1);
+                arrMesas.add(mesa2);
+                arrMesas.add(mesa3);
+                arrMesas.add(mesa4);
+                arrMesas.add(mesa5);
+
+                mesasR.addAll(arrMesas);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -75,9 +119,9 @@ public class Restaurante{
         // Menu
         if(acceso){
             if(tipo==1){
-                Menus.MenuA(arrMeseros, arrAdmin);
+                Menus.MenuA(arrMeseros, arrAdmin, arrMesas,mesasR, disponibles, ocupadas, meserosR, MeserosD, MeserosO);
             }else if(tipo==2){
-                Menus.MenuM(arrMeseros, arrAdmin);
+                Menus.MenuM(arrMeseros, arrAdmin, arrMesas,mesasR, disponibles, ocupadas, meserosR, MeserosD, MeserosO);
             }
         }
 

@@ -42,11 +42,5 @@ public abstract class Persona implements Serializable{
         this.telefono = telefono;
     }
 
-    public abstract void crearOrden();
-    public abstract void verDispoMesas();
-    public abstract void verMesasOcup();
-    public abstract void facturar();
-    public abstract void verEstadisticas();
-
     public abstract void mostrarInfo();
 }

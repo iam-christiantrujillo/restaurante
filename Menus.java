@@ -4,12 +4,14 @@ import personas.Administrador;
 import personas.Mesero;
 
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
 
 public class Menus {
-    public static void MenuA(ArrayList<Mesero> arrMeseros, ArrayList<Administrador> arrAdmin){
+    public static void MenuA(ArrayList<Mesero> arrMeseros, ArrayList<Administrador> arrAdmin, ArrayList<Mesa> arrMesas,Set<Mesa> mesasR, Set<Mesa> disponibles, Set<Mesa> ocupadas, Set<Mesero> meserosR , Set<Mesero> MeserosD, Set<Mesero> MeserosO){
         Scanner sc = new Scanner(System.in);
         int opc=0;
         do{
@@ -64,17 +66,16 @@ public class Menus {
         }while(opc!=3);
     }
 
-    public static void MenuM(ArrayList<Mesero> arrMeseros, ArrayList<Administrador> arrAdmin){
+    public static void MenuM(ArrayList<Mesero> arrMeseros, ArrayList<Administrador> arrAdmin, ArrayList<Mesa> arrMesas,Set<Mesa> mesasR, Set<Mesa> disponibles, Set<Mesa> ocupadas, Set<Mesero> meserosR, Set<Mesero> MeserosD, Set<Mesero> MeserosO ){
         Scanner sc = new Scanner(System.in);
         int opc=0;
         do{
             System.out.println("1) Ver personas registradas");
-            System.out.println("2) Salir");
+            System.out.println("2) Crear Orden");
+            System.out.println("3) Salir");
             opc = sc.nextInt();
 
             switch(opc){
-                
-
                 case 1:
                     System.out.println("\n--------------> Administradores\n");
                     Metodos.mostrarAR(arrAdmin);
@@ -83,6 +84,10 @@ public class Menus {
                     break;
 
                 case 2:
+                    
+                    break;
+
+                case 3:
                     try {
                         FileOutputStream f = new FileOutputStream("data/dataAdmin.ser");
                         ObjectOutputStream s = new ObjectOutputStream(f);
@@ -101,6 +106,6 @@ public class Menus {
                     break;
             }
 
-        }while(opc!=2);
+        }while(opc!=3);
     }
 }
