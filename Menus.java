@@ -57,6 +57,12 @@ public class Menus {
                         s2.writeObject(arrMeseros);
                        
                         s2.close();
+
+                        FileOutputStream f3 = new FileOutputStream("data/dataMesa.ser");
+                        ObjectOutputStream s3 = new ObjectOutputStream(f3);
+                        s3.writeObject(arrMesas);
+                       
+                        s3.close();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -72,7 +78,11 @@ public class Menus {
         do{
             System.out.println("1) Ver personas registradas");
             System.out.println("2) Crear Orden");
-            System.out.println("3) Salir");
+            System.out.println("3) Ver mesas disponibles");
+            System.out.println("4) Ver mesas ocupadas");
+            System.out.println("5) Ver todas las mesas");
+            System.out.println("6) Liberar mesa");
+            System.out.println("7) Salir");
             opc = sc.nextInt();
 
             switch(opc){
@@ -84,10 +94,26 @@ public class Menus {
                     break;
 
                 case 2:
-                    
+                    Metodos.crearOrden(arrMesas, arrMeseros, mesasR, disponibles, ocupadas, meserosR, MeserosD, MeserosO);
                     break;
 
                 case 3:
+                    Metodos.mostrarMesasD(mesasR, disponibles, ocupadas);
+                    break;
+
+                case 4:
+                    Metodos.mostrarMesasO(ocupadas);
+                    break;
+                
+                case 5:
+                    Metodos.mostrarMesas(arrMesas);
+                    break;
+
+                case 6:
+                    Metodos.liberarMesa(arrMesas,mesasR, ocupadas);
+                    break;
+
+                case 7:
                     try {
                         FileOutputStream f = new FileOutputStream("data/dataAdmin.ser");
                         ObjectOutputStream s = new ObjectOutputStream(f);
@@ -100,12 +126,18 @@ public class Menus {
                         s2.writeObject(arrMeseros);
                        
                         s2.close();
+
+                        FileOutputStream f3 = new FileOutputStream("data/dataMesa.ser");
+                        ObjectOutputStream s3 = new ObjectOutputStream(f3);
+                        s3.writeObject(arrMesas);
+                       
+                        s3.close();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
             }
 
-        }while(opc!=3);
+        }while(opc!=7);
     }
 }

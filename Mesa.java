@@ -1,6 +1,7 @@
 import personas.Mesero;
+import java.io.Serializable;
 
-public class Mesa {
+public class Mesa implements Serializable{
     // asociada a un mesero y una orden
     private int numMesa;
     private boolean ocupada = false;

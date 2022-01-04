@@ -134,6 +134,18 @@ public class Metodos {
         }
     }
 
+    public static void mostrarMesasO(Set<Mesa> ocupadas){
+        for(Mesa mesaO : ocupadas){
+            mesaO.verInfo();
+        }
+    }
+
+    public static void mostrarMesas(ArrayList<Mesa> arrMesas){
+        for(Mesa mesa : arrMesas){
+            mesa.verInfo();
+        }
+    }
+
     public static void mostrarMeserosD(Set<Mesero> meserosR,  Set<Mesero> MeserosD, Set<Mesero> MeserosO){
         MeserosD = meserosR;
         MeserosD.removeAll(MeserosO);
@@ -230,12 +242,19 @@ public class Metodos {
             arrMesas.get(numM-1).setMeseroACargo(arrMeseros.get(numMesero-1));
             arrMesas.get(numM-1).setOrdenMesa(ordenM);
 
-            // NOTA PARA CUANDO REGRESES: Hasta aqui ya logramos crear una mesa y agregarle un mesero y una orden, ya estan todos los atributos 
-            // ahora hay que agregar la opcion a los menus para ver si funciona, tambien hay que hacer la data para guardar info de las mesas
-
-
-
         }
+    }
+
+    public static void liberarMesa(ArrayList<Mesa> arrMesas,Set<Mesa> mesasR, Set<Mesa> ocupadas){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Que numero de mesa quiere liberar?");
+        Metodos.mostrarMesasO(ocupadas);
+        int numM=sc.nextInt();
+
+        arrMesas.get(numM-1).liberarMesa();
+        ocupadas.remove(arrMesas.get(numM-1));
+        mesasR.add(arrMesas.get(numM-1));
     }
 
 }
