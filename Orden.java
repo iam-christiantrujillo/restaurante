@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import platillos.Platillo;
+import java.io.Serializable;
 
-public class Orden {
+public class Orden implements Serializable{
     private ArrayList<Platillo> arrOrden = new ArrayList<Platillo>();
 
     public ArrayList<Platillo> getArrOrden(){

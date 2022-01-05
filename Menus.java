@@ -2,22 +2,30 @@ import java.util.Scanner;
 
 import personas.Administrador;
 import personas.Mesero;
+import platillos.ChileNogada;
+import platillos.Mole;
+import platillos.Pozole;
+import platillos.QuesoRelleno;
+import platillos.Tamal;
 
 import java.util.ArrayList;
 import java.util.Set;
-import java.util.HashSet;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
 
 public class Menus {
-    public static void MenuA(ArrayList<Mesero> arrMeseros, ArrayList<Administrador> arrAdmin, ArrayList<Mesa> arrMesas,Set<Mesa> mesasR, Set<Mesa> disponibles, Set<Mesa> ocupadas, Set<Mesero> meserosR , Set<Mesero> MeserosD, Set<Mesero> MeserosO){
+    public static void MenuA(ArrayList<Mesero> arrMeseros, ArrayList<Administrador> arrAdmin, ArrayList<Mesa> arrMesas,Set<Mesa> mesasR, Set<Mesa> disponibles, Set<Mesa> ocupadas, ArrayList<Mesero> meserosR , ArrayList<Mesero> MeserosD, ArrayList<Mesero> MeserosO, ArrayList<Integer> arrVentasP){
         Scanner sc = new Scanner(System.in);
         int opc=0;
         do{
             System.out.println("1) Registrar persona");
             System.out.println("2) Ver personas registradas");
-            System.out.println("3) Salir y guardar cambios");
+            System.out.println("3) Ver ventas totales de cada mesero");
+            System.out.println("4) Ver ventas totales de cada mesa");
+            System.out.println("5) Modificar perfil mesero");
+            System.out.println("6) Ver estadisticas");
+            System.out.println("7) Salir y guardar cambios");
             opc = sc.nextInt();
 
             switch(opc){
@@ -45,6 +53,22 @@ public class Menus {
                     break;
 
                 case 3:
+                    Metodos.mostrarVentasM(arrMeseros);
+                    break;
+
+                case 4:
+                    Metodos.mostrarVentasMesas(arrMesas);
+                    break;
+
+                case 5:
+                    Metodos.modificarMesero(arrMeseros);
+                    break;
+
+                case 6:
+                    Metodos.verEstadisticas(arrVentasP, arrMeseros);
+                    break;
+
+                case 7:
                     try {
                         FileOutputStream f = new FileOutputStream("data/dataAdmin.ser");
                         ObjectOutputStream s = new ObjectOutputStream(f);
@@ -63,16 +87,38 @@ public class Menus {
                         s3.writeObject(arrMesas);
                        
                         s3.close();
+
+
+                        if(arrVentasP.size()!=0){
+                            arrVentasP.add(ChileNogada.getVentas());
+                            arrVentasP.add(Mole.getVentas());
+                            arrVentasP.add(Pozole.getVentas());
+                            arrVentasP.add(QuesoRelleno.getVentas());
+                            arrVentasP.add(Tamal.getVentas());
+                        }else{
+                            arrVentasP.clear();
+                            arrVentasP.add(ChileNogada.getVentas());
+                            arrVentasP.add(Mole.getVentas());
+                            arrVentasP.add(Pozole.getVentas());
+                            arrVentasP.add(QuesoRelleno.getVentas());
+                            arrVentasP.add(Tamal.getVentas());
+                        }
+
+                        FileOutputStream f4 = new FileOutputStream("data/dataPlatillo.ser");
+                        ObjectOutputStream s4 = new ObjectOutputStream(f4);
+                        s4.writeObject(arrVentasP);
+                       
+                        s4.close();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
             }
 
-        }while(opc!=3);
+        }while(opc!=7);
     }
 
-    public static void MenuM(ArrayList<Mesero> arrMeseros, ArrayList<Administrador> arrAdmin, ArrayList<Mesa> arrMesas,Set<Mesa> mesasR, Set<Mesa> disponibles, Set<Mesa> ocupadas, Set<Mesero> meserosR, Set<Mesero> MeserosD, Set<Mesero> MeserosO ){
+    public static void MenuM(ArrayList<Mesero> arrMeseros, ArrayList<Administrador> arrAdmin, ArrayList<Mesa> arrMesas,Set<Mesa> mesasR, Set<Mesa> disponibles, Set<Mesa> ocupadas, ArrayList<Mesero> meserosR, ArrayList<Mesero> MeserosD, ArrayList<Mesero> MeserosO, ArrayList<Integer> arrVentasP ){
         Scanner sc = new Scanner(System.in);
         int opc=0;
         do{
@@ -110,7 +156,7 @@ public class Menus {
                     break;
 
                 case 6:
-                    Metodos.liberarMesa(arrMesas,mesasR, ocupadas);
+                    Metodos.liberarMesa(arrMesas,mesasR, ocupadas, MeserosO);
                     break;
 
                 case 7:
@@ -132,6 +178,29 @@ public class Menus {
                         s3.writeObject(arrMesas);
                        
                         s3.close();
+
+                        if(arrVentasP.size()!=0){
+                            arrVentasP.clear();
+                            arrVentasP.add(ChileNogada.getVentas());
+                            arrVentasP.add(Mole.getVentas());
+                            arrVentasP.add(Pozole.getVentas());
+                            arrVentasP.add(QuesoRelleno.getVentas());
+                            arrVentasP.add(Tamal.getVentas());
+                        }else{
+                            arrVentasP.add(ChileNogada.getVentas());
+                            arrVentasP.add(Mole.getVentas());
+                            arrVentasP.add(Pozole.getVentas());
+                            arrVentasP.add(QuesoRelleno.getVentas());
+                            arrVentasP.add(Tamal.getVentas());
+                        }
+
+                        FileOutputStream f4 = new FileOutputStream("data/dataPlatillo.ser");
+                        ObjectOutputStream s4 = new ObjectOutputStream(f4);
+                        s4.writeObject(arrVentasP);
+                       
+                        s4.close();
+
+                        
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

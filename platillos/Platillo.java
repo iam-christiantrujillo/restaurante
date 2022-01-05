@@ -1,7 +1,7 @@
 package platillos;
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public abstract class Platillo {
+public abstract class Platillo implements Serializable{
     private int precio;
 
     public Platillo(int precio){

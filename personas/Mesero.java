@@ -15,6 +15,10 @@ public class Mesero extends Persona {
         return numMesero;
     }
 
+    public void setNumMesero(int nuevo){
+        this.numMesero=nuevo;
+    }
+
     public boolean getAtendiendo(){
         return atendiendo;
     }
@@ -49,7 +53,7 @@ public class Mesero extends Persona {
 
     public void mostrarInfo(){
         System.out.println("--------> Mesero");
-        System.out.println("Numero de mesero: "+this.getNumMesero());
+        System.out.println("Numero de identificacion: "+this.getNumMesero());
         System.out.println("Ventas totales: "+this.getVentasTotales());
         System.out.println("Nombre: "+this.getNombre());
         System.out.println("Edad: "+this.getEdad());

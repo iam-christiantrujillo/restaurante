@@ -21,16 +21,32 @@ public abstract class Persona implements Serializable{
         return this.nombre;
     }
 
+    public void setNombre(String nuevo){
+        this.nombre=nuevo;
+    }
+
     public int getEdad(){
         return this.edad;
+    }
+
+    public void setEdad(int nueva){
+        this.edad=nueva;
     }
 
     public String getSexo(){
         return this.sexo;
     }
 
+    public void setSexo(String nuevo){
+        this.sexo=nuevo;
+    }
+
     public long getTelefono(){
         return this.telefono;
+    }
+
+    public void setTelefono(long nuevo){
+        this.telefono=nuevo;
     }
 
     public Persona(String userName, String passW,String nombre, int edad, String sexo, long telefono){

@@ -3,10 +3,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Mole extends Platillo{
+    private static int ventas=0;
     private ArrayList<String> ingredientes = new ArrayList<String>();
+
 
     public ArrayList<String> getIngredientes(){
         return this.ingredientes;
+    }
+
+    public static int getVentas(){
+        return ventas;
+    }
+
+    public static void setVentas(int aSumar){
+        ventas += aSumar;
     }
 
     public Mole(){
