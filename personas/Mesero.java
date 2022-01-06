@@ -5,6 +5,7 @@ public class Mesero extends Persona {
     private int numMesero;
     private boolean atendiendo = false;
     private int ventasTotales=0;
+    private int numPlatillosV=0;
     
     public Mesero(String userName, String passW,int numMesero,String nombre, int edad, String sexo, long telefono){
         super(userName, passW, nombre, edad, sexo, telefono);
@@ -33,6 +34,14 @@ public class Mesero extends Persona {
 
     public void setVentasTotales(int aSumar){
         this.ventasTotales+=aSumar;
+    }
+
+    public int getNumPlatillosV(){
+        return numPlatillosV;
+    }
+
+    public void setNumPlatillosV(int aSumar){
+        this.numPlatillosV+=aSumar;
     }
 
     public  void crearOrden(){

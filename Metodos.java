@@ -280,7 +280,8 @@ public class Metodos {
 
             arrMesas.get(numM-1).setVentasTotales(precioTotal);
             MeserosD.get(numMesero-1).setVentasTotales(precioTotal);
-
+            MeserosD.get(numMesero-1).setNumPlatillosV(ordenM.getArrOrden().size());
+            
             arrMesas.get(numM-1).setMeseroACargo(MeserosD.get(numMesero-1));
             arrMesas.get(numM-1).setOrdenMesa(ordenM);
 
@@ -378,43 +379,56 @@ public class Metodos {
 
     public static void verEstadisticas(ArrayList<Integer> arrVentasP,ArrayList<Mesero> arrMeseros){
         
-        int total=0;
+        float total=0f;
         for(Integer num : arrVentasP){
             total+=num;
-            System.out.println("Numero: "+num);
         }
 
         if(total==0){
             System.out.println("Aun no hay ventas");
         }else{
+            System.out.println("Ventas totales: " + total);
             System.out.println("Porcentaje de las ventas de cada platillo");
 
             System.out.println("Chile en Nogada:");
             System.out.println("Ventas totales: " + arrVentasP.get(0));
-            int porcentaje1=(arrVentasP.get(0)*100)/total;
+            float porcentaje1=((arrVentasP.get(0)*100)/total);
             System.out.println("Porcentaje: " + porcentaje1);
 
             System.out.println("Mole:");
             System.out.println("Ventas totales: " + arrVentasP.get(1));
-            int porcentaje2=(arrVentasP.get(1)*100)/total;
+            float porcentaje2=((arrVentasP.get(1)*100)/total);
             System.out.println("Porcentaje: " + porcentaje2);
 
             System.out.println("Pozole:");
             System.out.println("Ventas totales: " + arrVentasP.get(2));
-            int porcentaje3=(arrVentasP.get(2)*100)/total;
+            float porcentaje3=((arrVentasP.get(2)*100)/total);
             System.out.println("Porcentaje: " + porcentaje3);
 
             System.out.println("Queso relleno:");
             System.out.println("Ventas totales: " + arrVentasP.get(3));
-            int porcentaje4=(arrVentasP.get(3)*100)/total;
+            float porcentaje4=((arrVentasP.get(3)*100)/total);
             System.out.println("Porcentaje: " + porcentaje4);
 
             System.out.println("Tamal:");
             System.out.println("Ventas totales: " + arrVentasP.get(4));
-            int porcentaje5=(arrVentasP.get(4)*100)/total;
+            float porcentaje5=((arrVentasP.get(4)*100)/total);
             System.out.println("Porcentaje: " + porcentaje5);
 
             System.out.println("El mesero que ha vendido mas platillos es: ");
+
+            Mesero delMes = arrMeseros.get(0);
+
+            for(Mesero mesero : arrMeseros){
+                if(delMes.getNumPlatillosV()<=mesero.getNumPlatillosV()){
+                    delMes = mesero;
+                }
+            }
+
+            System.out.println("---> Mesero");
+            System.out.println("Numero de id del mesero: " + delMes.getNumMesero());
+            System.out.println("Nombre del mesero: " + delMes.getNombre());
+            System.out.println("Numero de platillos vendidos: " + delMes.getNumPlatillosV());
 
         }
     }

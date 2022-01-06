@@ -90,13 +90,13 @@ public class Menus {
 
 
                         if(arrVentasP.size()!=0){
+                            arrVentasP.clear();
                             arrVentasP.add(ChileNogada.getVentas());
                             arrVentasP.add(Mole.getVentas());
                             arrVentasP.add(Pozole.getVentas());
                             arrVentasP.add(QuesoRelleno.getVentas());
                             arrVentasP.add(Tamal.getVentas());
                         }else{
-                            arrVentasP.clear();
                             arrVentasP.add(ChileNogada.getVentas());
                             arrVentasP.add(Mole.getVentas());
                             arrVentasP.add(Pozole.getVentas());
