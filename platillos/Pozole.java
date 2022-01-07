@@ -21,37 +21,47 @@ public class Pozole extends Platillo{
     public Pozole(){
         super(50);
         Scanner sc = new Scanner(System.in);
-        System.out.println("Que tipo de carne quieres en tu pozole?");
-        System.out.println("1) De Puerco");
-        System.out.println("2) De Res");
-        System.out.println("3) De Pollo");
-        int tipo=sc.nextInt();
-        switch(tipo){
-            case 1:
-                ingredientes.add("Carne de puerco");
-                break;
-            case 2:
-                ingredientes.add("Carne de res");
-                break;
-            case 3:
-                ingredientes.add("Carne de Pollo");
-                break;
+
+        boolean paso = false;
+
+        while(paso!=true){
+            System.out.println("\nQue tipo de carne quieres en tu pozole?");
+            System.out.println("1) De Puerco");
+            System.out.println("2) De Res");
+            System.out.println("3) De Pollo");
+            int tipo=sc.nextInt();
+            switch(tipo){
+                case 1:
+                    ingredientes.add("Carne de puerco");
+                    paso = true;
+                    break;
+                case 2:
+                    ingredientes.add("Carne de res");
+                    paso = true;
+                    break;
+                case 3:
+                    ingredientes.add("Carne de Pollo");
+                    paso = true;
+                    break;
+                default:
+                    System.out.println("\nOpcion no valida.");
+            }
         }
+        
         ingredientes.add("Rabanos");
         ingredientes.add("Lechuga");
         ingredientes.add("Maiz");
     }
     
     public void mostrarInfo(){
-        System.out.println("-----> Pozole");
-        System.out.println("Ingredientes: ");
+        System.out.println("\t-----> Pozole");
+        System.out.println("\tIngredientes: ");
         int contador = 0;
         for(String ingrediente: this.getIngredientes()){
             contador++;
-            System.out.println(contador + ". " + ingrediente);
+            System.out.println("\t"+contador + ". " + ingrediente);
         }
-        System.out.println("Precio: " + this.getPrecio());
-        System.out.println("Ventas: " + Pozole.getVentas());
+        System.out.println("\tPrecio: $" + this.getPrecio());
     }
     
 }

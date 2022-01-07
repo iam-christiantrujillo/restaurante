@@ -28,13 +28,13 @@ public class ChileNogada extends Platillo{
     }
     
     public void mostrarInfo(){
-        System.out.println("-----> Chile en nogada");
-        System.out.println("Ingredientes: ");
+        System.out.println("\t-----> Chile en nogada");
+        System.out.println("\tIngredientes: ");
         int contador = 0;
         for(String ingrediente: this.getIngredientes()){
             contador++;
-            System.out.println(contador + ". " + ingrediente);
+            System.out.println("\t"+contador + ". " + ingrediente);
         }
-        System.out.println("Precio: " + this.getPrecio());
+        System.out.println("\tPrecio: $" + this.getPrecio());
     }
 }

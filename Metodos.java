@@ -10,7 +10,7 @@ import java.util.Set;
 public class Metodos {
     public static Mesero registrarM(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nombre de usuario del Mesero:");
+        System.out.println("\nNombre de usuario del Mesero:");
         String userName = sc.nextLine();
         System.out.println("Contraseña del Mesero:");
         String passW = sc.nextLine();
@@ -32,7 +32,7 @@ public class Metodos {
 
     public static Administrador registrarA(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nombre de usuario del Administrador:");
+        System.out.println("\nNombre de usuario del Administrador:");
         String userName = sc.nextLine();
         System.out.println("Contraseña del Administrador:");
         String passW = sc.nextLine();
@@ -51,49 +51,59 @@ public class Metodos {
 
     public static boolean loginM(ArrayList<Mesero> arrMeseros){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nombre de usuario:");
-        String userN = sc.nextLine();
+        int intentoN = 0;
 
-        for(Mesero usermesero : arrMeseros){
-            if(usermesero.getUserName().equals(userN)){
-                int intento = 0;
-                do{
-                    System.out.println("Contraseña:");
-                    String password = sc.nextLine();
-                    if(usermesero.getPassW().equals(password)){
-                        System.out.println("Bienvenido " + usermesero.getNombre());
-                        return true;
-                    }
-                    System.out.println("Contraseña incorrecta");
-                    intento++;
-                }while(intento!=3);
-                return false;
+        do{
+            System.out.println("\nNombre de usuario:");
+            String userN = sc.nextLine();
+            for(Mesero usermesero : arrMeseros){
+                if(usermesero.getUserName().equals(userN)){
+                    int intento = 0;
+                    do{
+                        System.out.println("Contraseña:");
+                        String password = sc.nextLine();
+                        if(usermesero.getPassW().equals(password)){
+                            System.out.println("\nBienvenido " + usermesero.getNombre());
+                            return true;
+                        }
+                        System.out.println("Contraseña incorrecta\n");
+                        intento++;
+                    }while(intento!=3);
+                    return false;
+                }
             }
-        }
+            System.out.println("Usuario no encontrado");
+            intentoN++;
+        }while(intentoN!=3);
         return false;
     }
 
     public static boolean loginA(ArrayList<Administrador> arrAdmin){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nombre de usuario:");
-        String userN = sc.nextLine();
+        int intentoN = 0;
 
-        for(Administrador useradmin : arrAdmin){
-            if(useradmin.getUserName().equals(userN)){
-                int intento = 0;
-                do{
-                    System.out.println("Contraseña:");
-                    String password = sc.nextLine();
-                    if(useradmin.getPassW().equals(password)){
-                        System.out.println("Bienvenido " + useradmin.getNombre());
-                        return true;
-                    }
-                    System.out.println("Contraseña incorrecta");
-                    intento++;
-                }while(intento!=3);
-                return false;
+        do{
+            System.out.println("\nNombre de usuario:");
+            String userN = sc.nextLine();
+            for(Administrador useradmin : arrAdmin){
+                if(useradmin.getUserName().equals(userN)){
+                    int intento = 0;
+                    do{
+                        System.out.println("Contraseña:");
+                        String password = sc.nextLine();
+                        if(useradmin.getPassW().equals(password)){
+                            System.out.println("\nBienvenido " + useradmin.getNombre());
+                            return true;
+                        }
+                        System.out.println("Contraseña incorrecta\n");
+                        intento++;
+                    }while(intento!=3);
+                    return false;
+                }
             }
-        }
+            System.out.println("Usuario no encontrado");
+            intentoN++;
+        }while(intentoN!=3);
         return false;
     }
 
@@ -160,19 +170,32 @@ public class Metodos {
         disponibles = mesasR;
         disponibles.removeAll(ocupadas);
 
-        for(Mesa mesaD : disponibles){
-            mesaD.verInfo();
+        if(disponibles.size()==0){
+            System.out.println("\nNo hay mesas disponibles");
+        }else{
+            for(Mesa mesaD : disponibles){
+                System.out.println("\n");
+                mesaD.verInfo();
+            }
         }
+
     }
 
     public static void mostrarMesasO(Set<Mesa> ocupadas){
-        for(Mesa mesaO : ocupadas){
-            mesaO.verInfo();
+
+        if(ocupadas.size()==0){
+            System.out.println("\nNo hay mesas ocupadas");
+        }else{
+            for(Mesa mesaO : ocupadas){
+                System.out.println("\n");
+                mesaO.verInfo();
+            }
         }
     }
 
     public static void mostrarMesas(ArrayList<Mesa> arrMesas){
         for(Mesa mesa : arrMesas){
+            System.out.println("\n");
             mesa.verInfo();
         }
     }
@@ -181,12 +204,17 @@ public class Metodos {
         MeserosD = meserosR;
         MeserosD.removeAll(MeserosO);
 
-        int contador = 1;
-        for(Mesero mesero : MeserosD){
-            System.out.println("\nMesero con numero " + contador + " disponible:");
-            mesero.mostrarInfo();
-            contador++;
+        if(MeserosD.size()==0){
+            System.out.println("\nNo hay meseros disponibles");
+        }else{
+            int contador = 1;
+            for(Mesero mesero : MeserosD){
+                System.out.println("\nMesero con numero " + contador + " disponible:");
+                mesero.mostrarInfo();
+                contador++;
+            }
         }
+
     }
 
     public static void crearOrden(ArrayList<Mesa> arrMesas,ArrayList<Mesero> arrMeseros,Set<Mesa> mesasR,  Set<Mesa> disponibles, Set<Mesa> ocupadas, ArrayList<Mesero> meserosR,  ArrayList<Mesero> MeserosD, ArrayList<Mesero> MeserosO){
@@ -197,111 +225,187 @@ public class Metodos {
         MeserosD.removeAll(MeserosO);
 
         if(disponibles.size() == 0){
-            System.out.println("Todas las mesas estan ocupadas");
+            System.out.println("\nTodas las mesas estan ocupadas");
 
         }else{
             Scanner sc = new Scanner(System.in);
 
-            System.out.println("Que numero de mesa se reservara?");
+            System.out.println("\nQue numero de mesa se reservara?");
             Metodos.mostrarMesasD(mesasR, disponibles, ocupadas);
             int numM=sc.nextInt();
 
-            System.out.println("Cual es el numero del mesero que estara a cargo de atender la mesa?");
-            Metodos.mostrarMeserosD(meserosR, MeserosD, MeserosO);
-            int numMesero=sc.nextInt();
+            if(numM <= arrMesas.size() & numM !=0){
 
-            System.out.println("Ingrese la orden");
-            Orden ordenM = new Orden();
+                if(disponibles.contains(arrMesas.get(numM-1))){
+                    System.out.println("\nCual es el numero del mesero que estara a cargo de atender la mesa?");
+                    Metodos.mostrarMeserosD(meserosR, MeserosD, MeserosO);
+                    int numMesero=sc.nextInt();
+                    
+                    if(numMesero <= MeserosD.size() & numMesero != 0){
+                        
+                        System.out.println("\nIngrese la orden");
+                        Orden ordenM = new Orden();
+        
+                        int opc;
+                        int precioTotal=0;
+                        
+                        do{
+                            System.out.println("\n------> Menu ");
+                            System.out.println("1) Pozole");
+                            System.out.println("2) Mole");
+                            System.out.println("3) Queso Relleno");
+                            System.out.println("4) Tamal");
+                            System.out.println("5) Chile en Nogada");
+                            System.out.println("6) Terminar orden");
+                            opc = sc.nextInt();
+        
+                            switch(opc){
+                                case 1: 
+                                    Pozole pozole= new Pozole();
+                                    precioTotal+=pozole.getPrecio();
+                                    Pozole.setVentas(pozole.getPrecio());
+                                    ordenM.getArrOrden().add(pozole);
+                                    break;
+                                case 2: 
+                                    Mole mole= new Mole();
+                                    precioTotal+=mole.getPrecio();
+                                    Mole.setVentas(mole.getPrecio());
+                                    ordenM.getArrOrden().add(mole);
+                                    break;
+                                case 3: 
+                                    QuesoRelleno quesoR= new QuesoRelleno();
+                                    precioTotal+=quesoR.getPrecio();
+                                    QuesoRelleno.setVentas(quesoR.getPrecio());
+                                    ordenM.getArrOrden().add(quesoR);
+                                    break;
+                                case 4: 
+                                    Tamal tamal= new Tamal();
+                                    precioTotal+=tamal.getPrecio();
+                                    Tamal.setVentas(tamal.getPrecio());
+                                    ordenM.getArrOrden().add(tamal);
+                                    break;
+                                case 5: 
+                                    ChileNogada chile= new ChileNogada();
+                                    precioTotal+=chile.getPrecio();
+                                    ChileNogada.setVentas(chile.getPrecio());
+                                    ordenM.getArrOrden().add(chile);
+                                    break;
+                                case 6: 
+                                    if(ordenM.getArrOrden().size()==0){
+                                        System.out.println("\nLo sentimos. Tienes que ordenar algo.");
+                                        opc=10;
+                                    }else{
+                                        System.out.println("\nOrden registrada");
+                                    }
+                                    break;
+                                default:
+                                    System.out.println("\nOpcion no valida");
+                            }
+        
+                        }while(opc!=6);
+        
+        
+                        // Ya quedo toda la info que necesitabamos, ahora agregamos toda esta a las propiedades de la mesa a reservar
+                        ordenM.setPrecioOrden(precioTotal);
+                        arrMesas.get(numM-1).setOcupada(true);
+                        MeserosD.get(numMesero-1).setAtendiendo(true);
+                        ocupadas.add(arrMesas.get(numM-1));
+                        MeserosO.add(MeserosD.get(numMesero-1));
+        
+                        arrMesas.get(numM-1).setVentasTotales(precioTotal);
+                        MeserosD.get(numMesero-1).setVentasTotales(precioTotal);
+                        MeserosD.get(numMesero-1).setNumPlatillosV(ordenM.getArrOrden().size());
+                        
+                        arrMesas.get(numM-1).setMeseroACargo(MeserosD.get(numMesero-1));
+                        arrMesas.get(numM-1).setOrdenMesa(ordenM);
 
-            int opc;
-            int precioTotal=0;
-            
-            do{
-                System.out.println("------> Menu ");
-                System.out.println("1) Pozole");
-                System.out.println("2) Mole");
-                System.out.println("3) Queso Relleno");
-                System.out.println("4) Tamal");
-                System.out.println("5) Chile en Nogada");
-                System.out.println("6) Terminar orden");
-                opc = sc.nextInt();
-
-                switch(opc){
-                    case 1: 
-                        Pozole pozole= new Pozole();
-                        precioTotal+=pozole.getPrecio();
-                        Pozole.setVentas(pozole.getPrecio());
-                        ordenM.getArrOrden().add(pozole);
-                        break;
-                    case 2: 
-                        Mole mole= new Mole();
-                        precioTotal+=mole.getPrecio();
-                        Mole.setVentas(mole.getPrecio());
-                        ordenM.getArrOrden().add(mole);
-                        break;
-                    case 3: 
-                        QuesoRelleno quesoR= new QuesoRelleno();
-                        precioTotal+=quesoR.getPrecio();
-                        QuesoRelleno.setVentas(quesoR.getPrecio());
-                        ordenM.getArrOrden().add(quesoR);
-                        break;
-                    case 4: 
-                        Tamal tamal= new Tamal();
-                        precioTotal+=tamal.getPrecio();
-                        Tamal.setVentas(tamal.getPrecio());
-                        ordenM.getArrOrden().add(tamal);
-                        break;
-                    case 5: 
-                        ChileNogada chile= new ChileNogada();
-                        precioTotal+=chile.getPrecio();
-                        ChileNogada.setVentas(chile.getPrecio());
-                        ordenM.getArrOrden().add(chile);
-                        break;
-                    case 6: 
-                        if(ordenM.getArrOrden().size()==0){
-                            System.out.println("Lo sentimos. Tienes que ordenar algo.");
-                            opc=10;
-                        }else{
-                            System.out.println("Orden registrada");
-                        }
-                        break;
-                    default:
-                        System.out.println("Opcion no valida");
+                    }else{
+                        System.out.println("\nNumero de mesero invalido");
+                    }
+                }else{
+                    System.out.println("\nNumero de mesa no disponible");
                 }
-
-            }while(opc!=6);
-
-
-            // Ya quedo toda la info que necesitabamos, ahora agregamos toda esta a las propiedades de la mesa a reservar
-            arrMesas.get(numM-1).setOcupada(true);
-            MeserosD.get(numMesero-1).setAtendiendo(true);
-            ocupadas.add(arrMesas.get(numM-1));
-            MeserosO.add(MeserosD.get(numMesero-1));
-
-            arrMesas.get(numM-1).setVentasTotales(precioTotal);
-            MeserosD.get(numMesero-1).setVentasTotales(precioTotal);
-            MeserosD.get(numMesero-1).setNumPlatillosV(ordenM.getArrOrden().size());
-            
-            arrMesas.get(numM-1).setMeseroACargo(MeserosD.get(numMesero-1));
-            arrMesas.get(numM-1).setOrdenMesa(ordenM);
-
-
+            }else{
+                System.out.println("\nNumero de mesa invalido");
+            }
         }
     }
 
     public static void liberarMesa(ArrayList<Mesa> arrMesas,Set<Mesa> mesasR, Set<Mesa> ocupadas, ArrayList<Mesero> MeserosO){
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Que numero de mesa quiere liberar?");
-        Metodos.mostrarMesasO(ocupadas);
-        int numM=sc.nextInt();
+        if(ocupadas.size()!=0){
+            System.out.println("\nQue numero de mesa quiere liberar?");
+            Metodos.mostrarMesasO(ocupadas);
+            int numM=sc.nextInt();
 
-        MeserosO.removeIf(mesero -> mesero.getNumMesero()== arrMesas.get(numM-1).getMeseroACargo().getNumMesero());
-        arrMesas.get(numM-1).liberarMesa();
-        ocupadas.remove(arrMesas.get(numM-1));
-        mesasR.add(arrMesas.get(numM-1));
-        
-       
+            if(numM <= arrMesas.size() & numM !=0){
+
+                if(ocupadas.contains(arrMesas.get(numM-1))){
+
+                    boolean paso = false;
+
+                    while(paso!=true){
+                        System.out.println("\nComo se realizara el pago?");
+                        System.out.println("1) Pago en efectivo");
+                        System.out.println("2) Pago con tarjeta");
+                        int metodo = sc.nextInt();
+                        if(metodo==1){
+                            System.out.println("\n----------- Factura -----------");
+                            System.out.println("Concepto: Restaurante Mexico");
+                            System.out.println("Subtotal: $" + arrMesas.get(numM-1).getOrdenMesa().getPrecioOrden());
+                            float iva = (arrMesas.get(numM-1).getOrdenMesa().getPrecioOrden() * 16f) / 100f;
+                            System.out.println("IVA 16%: $" + iva);
+                            int propina = 100;
+                            System.out.println("Propina: $" + propina);
+                            System.out.println("Metodo de pago: Pago en efectivo");
+                            float total = arrMesas.get(numM-1).getOrdenMesa().getPrecioOrden() + iva + propina;
+                            System.out.println("Total: $" + total);
+                            
+                            paso = true;
+
+                        }else if(metodo==2){
+                            System.out.println("\nNumero de tarjeta:");
+                            long numT = sc.nextLong();
+                            System.out.println("NIP:");
+                            long nip = sc.nextLong();
+
+                            System.out.println("\n----------- Factura -----------");
+                            System.out.println("Concepto: Restaurante Mexico");
+                            System.out.println("Subtotal: $" + arrMesas.get(numM-1).getOrdenMesa().getPrecioOrden());
+                            float iva = (arrMesas.get(numM-1).getOrdenMesa().getPrecioOrden() * 16f) / 100f;
+                            System.out.println("IVA 16%: $" + iva);
+                            int propina = 100;
+                            System.out.println("Propina: $" + propina);
+                            System.out.println("Metodo de pago: Tarjeta de credito");
+                            System.out.println("Numero de tarjeta: " + numT);
+
+                            float total = arrMesas.get(numM-1).getOrdenMesa().getPrecioOrden() + iva + propina;
+                            System.out.println("Total: $" + total);
+
+                            paso = true;
+                        }else{
+                            System.out.println("\nOpcion no valida");
+                        }
+                    }
+
+                    System.out.println("\n-------- Pago exitoso --------");
+
+                    MeserosO.removeIf(mesero -> mesero== arrMesas.get(numM-1).getMeseroACargo());
+                    arrMesas.get(numM-1).liberarMesa();
+                    ocupadas.remove(arrMesas.get(numM-1));
+                    mesasR.add(arrMesas.get(numM-1));  
+
+                }else{
+                    System.out.println("\nNumero de mesa no ocupada");
+                }
+            }else{
+                System.out.println("\nNumero de mesa invalido");
+            }
+
+        }else{
+            System.out.println("\nNo hay mesas ocupadas");
+        }
 
     }
 
@@ -311,67 +415,72 @@ public class Metodos {
         if(arrMeseros.size()==0){
             System.out.println("\nNo hay meseros registrados");
         }else{
-            System.out.println("Que numero de mesero quieres modificar?");
+            System.out.println("\nQue numero de mesero quieres modificar?");
             Metodos.mostrarMR(arrMeseros);
             int mesero = sc.nextInt();
 
-            System.out.println("Que atributo quieres modificar?");
-            System.out.println("1) Numero de mesero");
-            System.out.println("2) Nombre");
-            System.out.println("3) Edad");
-            System.out.println("4) Sexo");
-            System.out.println("5) Telefono");
-            int opc=sc.nextInt();
+            if(mesero <= arrMeseros.size()){
 
-            switch(opc){
-                case 1:
-                    System.out.println("Numero de mesero actual: "+arrMeseros.get(mesero-1).getNumMesero());
-                    System.out.println("Cual sera el nuevo numero de mesero?");
-                    int nuevoN = sc.nextInt();
-                    arrMeseros.get(mesero-1).setNumMesero(nuevoN);
-                    System.out.println("Modificacion exitosa:");
-                    System.out.println("Numero de mesero actual: "+arrMeseros.get(mesero-1).getNumMesero());
-                    break;
+                System.out.println("\nQue atributo quieres modificar?");
+                System.out.println("1) Numero de mesero");
+                System.out.println("2) Nombre");
+                System.out.println("3) Edad");
+                System.out.println("4) Sexo");
+                System.out.println("5) Telefono");
+                int opc=sc.nextInt();
 
-                case 2:
-                    System.out.println("Nombre actual: "+arrMeseros.get(mesero-1).getNombre());
-                    System.out.println("Cual sera el nuevo nombre?");
-                    String nuevo = sc.nextLine();
-                    arrMeseros.get(mesero-1).setNombre(nuevo);
-                    System.out.println("Modificacion exitosa:");
-                    System.out.println("Nombre actual: "+arrMeseros.get(mesero-1).getNombre());
-                    break;
+                switch(opc){
+                    case 1:
+                        System.out.println("\nNumero de mesero actual: "+arrMeseros.get(mesero-1).getNumMesero());
+                        System.out.println("\nCual sera el nuevo numero de mesero?");
+                        int nuevoN = sc.nextInt();
+                        arrMeseros.get(mesero-1).setNumMesero(nuevoN);
+                        System.out.println("\nModificacion exitosa:");
+                        System.out.println("Numero de mesero actual: "+arrMeseros.get(mesero-1).getNumMesero());
+                        break;
 
-                case 3:
-                    System.out.println("Edad actual: "+arrMeseros.get(mesero-1).getEdad());
-                    System.out.println("Cual sera la edad nueva?");
-                    int nueva = sc.nextInt();
-                    arrMeseros.get(mesero-1).setEdad(nueva);
-                    System.out.println("Modificacion exitosa:");
-                    System.out.println("Edad actual: "+arrMeseros.get(mesero-1).getEdad());
-                    break;
+                    case 2:
+                        System.out.println("\nNombre actual: "+arrMeseros.get(mesero-1).getNombre());
+                        System.out.println("\nCual sera el nuevo nombre?");
+                        String nuevo = sc.nextLine();
+                        arrMeseros.get(mesero-1).setNombre(nuevo);
+                        System.out.println("\nModificacion exitosa:");
+                        System.out.println("Nombre actual: "+arrMeseros.get(mesero-1).getNombre());
+                        break;
 
-                case 4:
-                    System.out.println("Sexo actual: "+arrMeseros.get(mesero-1).getSexo());
-                    System.out.println("Cual sera el nuevo sexo?");
-                    String nuevoS = sc.nextLine();
-                    arrMeseros.get(mesero-1).setSexo(nuevoS);
-                    System.out.println("Modificacion exitosa:");
-                    System.out.println("Sexo actual: "+arrMeseros.get(mesero-1).getSexo());
-                    break;
+                    case 3:
+                        System.out.println("\nEdad actual: "+arrMeseros.get(mesero-1).getEdad());
+                        System.out.println("\nCual sera la edad nueva?");
+                        int nueva = sc.nextInt();
+                        arrMeseros.get(mesero-1).setEdad(nueva);
+                        System.out.println("\nModificacion exitosa:");
+                        System.out.println("Edad actual: "+arrMeseros.get(mesero-1).getEdad());
+                        break;
 
-                case 5:
-                    System.out.println("Telefono actual: "+arrMeseros.get(mesero-1).getTelefono());
-                    System.out.println("Cual sera el nuevo telefono?");
-                    long nuevoT = sc.nextInt();
-                    arrMeseros.get(mesero-1).setTelefono(nuevoT);
-                    System.out.println("Modificacion exitosa:");
-                    System.out.println("Telefono actual: "+arrMeseros.get(mesero-1).getTelefono());
-                    break;
+                    case 4:
+                        System.out.println("\nSexo actual: "+arrMeseros.get(mesero-1).getSexo());
+                        System.out.println("\nCual sera el nuevo sexo?");
+                        String nuevoS = sc.nextLine();
+                        arrMeseros.get(mesero-1).setSexo(nuevoS);
+                        System.out.println("\nModificacion exitosa:");
+                        System.out.println("Sexo actual: "+arrMeseros.get(mesero-1).getSexo());
+                        break;
 
-                default:
-                    System.out.println("Opcion no valida");
+                    case 5:
+                        System.out.println("\nTelefono actual: "+arrMeseros.get(mesero-1).getTelefono());
+                        System.out.println("\nCual sera el nuevo telefono?");
+                        long nuevoT = sc.nextInt();
+                        arrMeseros.get(mesero-1).setTelefono(nuevoT);
+                        System.out.println("\nModificacion exitosa:");
+                        System.out.println("Telefono actual: "+arrMeseros.get(mesero-1).getTelefono());
+                        break;
 
+                    default:
+                        System.out.println("\nOpcion no valida");
+
+                }
+            }else{
+                System.out.println("\nNumero de mesero invalido");
             }
         }
     }
@@ -385,37 +494,37 @@ public class Metodos {
         }
 
         if(total==0){
-            System.out.println("Aun no hay ventas");
+            System.out.println("\nAun no hay ventas");
         }else{
-            System.out.println("Ventas totales: " + total);
-            System.out.println("Porcentaje de las ventas de cada platillo");
+            System.out.println("\nVentas totales: $" + total);
+            System.out.println("\nPorcentaje de las ventas de cada platillo:");
 
-            System.out.println("Chile en Nogada:");
-            System.out.println("Ventas totales: " + arrVentasP.get(0));
+            System.out.println("\n---> Chile en Nogada:");
+            System.out.println("Ventas totales: $" + arrVentasP.get(0));
             float porcentaje1=((arrVentasP.get(0)*100)/total);
-            System.out.println("Porcentaje: " + porcentaje1);
+            System.out.println("Porcentaje: " + porcentaje1 + "%");
 
-            System.out.println("Mole:");
-            System.out.println("Ventas totales: " + arrVentasP.get(1));
+            System.out.println("\n---> Mole:");
+            System.out.println("Ventas totales: $" + arrVentasP.get(1));
             float porcentaje2=((arrVentasP.get(1)*100)/total);
-            System.out.println("Porcentaje: " + porcentaje2);
+            System.out.println("Porcentaje: " + porcentaje2 + "%");
 
-            System.out.println("Pozole:");
-            System.out.println("Ventas totales: " + arrVentasP.get(2));
+            System.out.println("\n---> Pozole:");
+            System.out.println("Ventas totales: $" + arrVentasP.get(2));
             float porcentaje3=((arrVentasP.get(2)*100)/total);
-            System.out.println("Porcentaje: " + porcentaje3);
+            System.out.println("Porcentaje: " + porcentaje3 + "%");
 
-            System.out.println("Queso relleno:");
-            System.out.println("Ventas totales: " + arrVentasP.get(3));
+            System.out.println("\n---> Queso relleno:");
+            System.out.println("Ventas totales: $" + arrVentasP.get(3));
             float porcentaje4=((arrVentasP.get(3)*100)/total);
-            System.out.println("Porcentaje: " + porcentaje4);
+            System.out.println("Porcentaje: " + porcentaje4 + "%");
 
-            System.out.println("Tamal:");
-            System.out.println("Ventas totales: " + arrVentasP.get(4));
+            System.out.println("\n---> Tamal:");
+            System.out.println("Ventas totales: $" + arrVentasP.get(4));
             float porcentaje5=((arrVentasP.get(4)*100)/total);
-            System.out.println("Porcentaje: " + porcentaje5);
+            System.out.println("Porcentaje: " + porcentaje5 + "%");
 
-            System.out.println("El mesero que ha vendido mas platillos es: ");
+            System.out.println("\nEl mesero que ha vendido mas platillos es: ");
 
             Mesero delMes = arrMeseros.get(0);
 
@@ -425,7 +534,7 @@ public class Metodos {
                 }
             }
 
-            System.out.println("---> Mesero");
+            System.out.println("\n---> Mesero");
             System.out.println("Numero de id del mesero: " + delMes.getNumMesero());
             System.out.println("Nombre del mesero: " + delMes.getNombre());
             System.out.println("Numero de platillos vendidos: " + delMes.getNumPlatillosV());

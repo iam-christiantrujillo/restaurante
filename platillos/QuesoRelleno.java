@@ -25,13 +25,13 @@ public class QuesoRelleno extends Platillo{
     }
     
     public void mostrarInfo(){
-        System.out.println("-----> Queso relleno");
-        System.out.println("Ingredientes: ");
+        System.out.println("\t-----> Queso relleno");
+        System.out.println("\tIngredientes: ");
         int contador = 0;
         for(String ingrediente: this.getIngredientes()){
             contador++;
-            System.out.println(contador + ". " + ingrediente);
+            System.out.println("\t"+contador + ". " + ingrediente);
         }
-        System.out.println("Precio: " + this.getPrecio());
+        System.out.println("\tPrecio: $" + this.getPrecio());
     }
 }

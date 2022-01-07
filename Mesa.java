@@ -60,7 +60,7 @@ public class Mesa implements Serializable{
     public void verInfo(){
         System.out.println("-----> Mesa");
         System.out.println("Numero de mesa: "+this.getNumMesa());
-        System.out.println("Ventas totales: "+this.getVentasTotales());
+        System.out.println("Ventas totales: $"+this.getVentasTotales());
         System.out.println("Ocupada: "+this.getOcupada());
         if(this.getOcupada()==true){
             System.out.println("Mesero a cargo: "+this.getMeseroACargo().getNombre());

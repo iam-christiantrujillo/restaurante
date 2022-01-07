@@ -63,7 +63,7 @@ public class Mesero extends Persona {
     public void mostrarInfo(){
         System.out.println("--------> Mesero");
         System.out.println("Numero de identificacion: "+this.getNumMesero());
-        System.out.println("Ventas totales: "+this.getVentasTotales());
+        System.out.println("Ventas totales: $"+this.getVentasTotales());
         System.out.println("Nombre: "+this.getNombre());
         System.out.println("Edad: "+this.getEdad());
         System.out.println("Sexo: "+this.getSexo());

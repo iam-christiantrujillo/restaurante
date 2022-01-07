@@ -63,7 +63,14 @@ public class Restaurante{
                 for(int i=0; i<meseros.size();i++){
                     arrMeseros.add((Mesero) meseros.get(i));
                 }
+
                 meserosR.addAll(arrMeseros);
+
+                // for(Mesero mesero : arrMeseros){
+                //     if(mesero.getAtendiendo()==true){
+                //         mesero.setAtendiendo(false);
+                //     }
+                // }
                 s.close();
                 
             }else{
@@ -80,6 +87,14 @@ public class Restaurante{
                     arrMesas.add((Mesa) mesas.get(i));
                 }
                 mesasR.addAll(arrMesas);
+
+                // for(Mesa mesa : arrMesas){
+                //     if(mesa.getOcupada()==true){
+                //         ocupadas.add(mesa);
+                //         mesa.setMeseroACargo((Mesero) mesa.getMeseroACargo());
+                //     }
+                // }
+
                 s.close();
                 
             }else{
@@ -127,10 +142,11 @@ public class Restaurante{
 
         // Login 
         boolean acceso = false;
-        System.out.println("Que tipo de persona eres?");
+        System.out.println("\nQue tipo de persona eres?");
         System.out.println("1) Administrador");
         System.out.println("2) Mesero");
         int tipo = sc.nextInt();
+
         if(tipo==1){
             if(Metodos.loginA(arrAdmin)){
                 acceso = true;
