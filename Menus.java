@@ -37,9 +37,19 @@ public class Menus {
                     int num=sc.nextInt();
 
                     if(num==1){
-                        arrAdmin.add(Metodos.registrarA());
+                        Administrador admin = new Administrador();
+                        admin = Metodos.registrarA();
+                        if(admin.getTelefono()!=0){
+                            arrAdmin.add(admin);
+                        }
+
                     }else if(num==2){
-                        arrMeseros.add(Metodos.registrarM());
+                        Mesero mesero = new Mesero();
+                        mesero = Metodos.registrarM();
+                        if(mesero.getTelefono()!=0){
+                            arrMeseros.add(mesero);
+                        }
+                    
                     }else{
                         System.out.println("\nOpcion no valida");
                     }

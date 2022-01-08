@@ -2,6 +2,10 @@ package personas;
 
 public class Administrador extends Persona {
 
+    public Administrador(){
+
+    }
+
     public Administrador(String userName, String passW,String nombre, int edad, String sexo, long telefono){
         super(userName, passW, nombre, edad, sexo, telefono);
     }

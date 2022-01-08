@@ -7,46 +7,103 @@ import platillos.*;
 import java.util.ArrayList;
 import java.util.Set;
 
+import excepciones.EdadException;
+import excepciones.NombreException;
+import excepciones.NumeroMeseroException;
+import excepciones.PasswordException;
+import excepciones.SexoException;
+import excepciones.TelefonoException;
+import excepciones.UserNameException;
+
 public class Metodos {
     public static Mesero registrarM(){
+        Mesero nuevo = new Mesero();
         Scanner sc = new Scanner(System.in);
-        System.out.println("\nNombre de usuario del Mesero:");
-        String userName = sc.nextLine();
-        System.out.println("Contraseña del Mesero:");
-        String passW = sc.nextLine();
-        System.out.println("Numero de Mesero:");
-        int numM = sc.nextInt();
-        System.out.println("Nombre del Mesero:");
-        sc.nextLine();
-        String nombre = sc.nextLine();
-        System.out.println("Edad del Mesero:");
-        int edad = sc.nextInt();
-        System.out.println("Sexo del Mesero:");
-        sc.nextLine();
-        String sexo = sc.nextLine();
-        System.out.println("Telefono del Mesero:");
-        long telefono = sc.nextLong();
-        Mesero mesero = new Mesero(userName, passW,numM, nombre, edad, sexo, telefono);
-        return mesero;
+        try {
+            System.out.println("\nNombre de usuario del Mesero (no mayusculas, por lo menos 4 caracteres):");
+            String userName = sc.nextLine();
+            nuevo.setUserName(userName);
+            System.out.println("Contraseña del Mesero (por lo menos 4 caracteres):");
+            String passW = sc.nextLine();
+            nuevo.setPassW(passW);
+            System.out.println("Numero de Mesero (no letras, 3 digitos):");
+            String numM = sc.nextLine();
+            nuevo.setNumMesero(numM);
+            System.out.println("Nombre del Mesero (no digitos, primera letra mayuscula):");
+            String nombre = sc.nextLine();
+            nuevo.setNombre(nombre);
+            System.out.println("Edad del Mesero (mayor a 0 y menor a 100 años, no letras):");
+            String edad = sc.nextLine();
+            nuevo.setEdad(edad);
+            System.out.println("Sexo del Mesero (M o F):");
+            String sexo = sc.nextLine();
+            nuevo.setSexo(sexo);
+            System.out.println("Telefono del Mesero (10 digitos, no letras):");
+            String telefono = sc.nextLine();
+            nuevo.setTelefono(telefono);
+
+            
+            
+        } catch (UserNameException e) {
+            e.printStackTrace();
+        } catch (PasswordException e) {
+            e.printStackTrace();
+        } catch (NumeroMeseroException e) {
+            e.printStackTrace();
+        } catch (NombreException e) {
+            e.printStackTrace();
+        } catch (EdadException e) {
+            e.printStackTrace();
+        } catch (SexoException e) {
+            e.printStackTrace();
+        } catch (TelefonoException e) {
+            e.printStackTrace();
+        }
+
+        return nuevo;
     }
 
     public static Administrador registrarA(){
+        Administrador nuevo = new Administrador();
         Scanner sc = new Scanner(System.in);
-        System.out.println("\nNombre de usuario del Administrador:");
-        String userName = sc.nextLine();
-        System.out.println("Contraseña del Administrador:");
-        String passW = sc.nextLine();
-        System.out.println("Nombre del Administrador:");
-        String nombre = sc.nextLine();
-        System.out.println("Edad del Administrador:");
-        int edad = sc.nextInt();
-        System.out.println("Sexo del Administrador:");
-        sc.nextLine();
-        String sexo = sc.nextLine();
-        System.out.println("Telefono del Administrador:");
-        long telefono = sc.nextLong();
-        Administrador admin = new Administrador(userName, passW, nombre, edad, sexo, telefono);
-        return admin;
+
+        try {
+            System.out.println("\nNombre de usuario del Administrador (no mayusculas, por lo menos 4 caracteres):");
+            String userName = sc.nextLine();
+            nuevo.setUserName(userName);
+            System.out.println("Contraseña del Administrador (por lo menos 4 caracteres):");
+            String passW = sc.nextLine();
+            nuevo.setPassW(passW);
+            System.out.println("Nombre del Administrador (no digitos, primera letra mayuscula):");
+            String nombre = sc.nextLine();
+            nuevo.setNombre(nombre);
+            System.out.println("Edad del Administrador (mayor a 0 y menor a 100 años, no letras):");
+            String edad = sc.nextLine();
+            nuevo.setEdad(edad);
+            System.out.println("Sexo del Administrador (M o F):");
+            String sexo = sc.nextLine();
+            nuevo.setSexo(sexo);
+            System.out.println("Telefono del Administrador (10 digitos, no letras):");
+            String telefono = sc.nextLine();
+            nuevo.setTelefono(telefono);
+
+            
+            
+        } catch (UserNameException e) {
+            e.printStackTrace();
+        } catch (PasswordException e) {
+            e.printStackTrace();
+        } catch (NombreException e) {
+            e.printStackTrace();
+        } catch (EdadException e) {
+            e.printStackTrace();
+        } catch (SexoException e) {
+            e.printStackTrace();
+        } catch (TelefonoException e) {
+            e.printStackTrace();
+        }
+        
+        return nuevo;
     }
 
     public static boolean loginM(ArrayList<Mesero> arrMeseros){
@@ -441,48 +498,83 @@ public class Metodos {
 
                 switch(opc){
                     case 1:
-                        System.out.println("\nNumero de mesero actual: "+arrMeseros.get(mesero-1).getNumMesero());
-                        System.out.println("\nCual sera el nuevo numero de mesero?");
-                        int nuevoN = sc.nextInt();
-                        arrMeseros.get(mesero-1).setNumMesero(nuevoN);
-                        System.out.println("\nModificacion exitosa:");
-                        System.out.println("Numero de mesero actual: "+arrMeseros.get(mesero-1).getNumMesero());
+                        try {
+                            System.out.println("\nNumero de mesero actual: "+arrMeseros.get(mesero-1).getNumMesero());
+                            System.out.println("\nCual sera el nuevo numero de mesero? (no letras, 3 digitos)");
+                            sc.nextLine();
+                            String nuevoN = sc.nextLine();
+                            arrMeseros.get(mesero-1).setNumMesero(nuevoN);
+                            System.out.println("\nModificacion exitosa:");
+                            System.out.println("Numero de mesero actual: "+arrMeseros.get(mesero-1).getNumMesero());
+                            
+                        } catch (NumeroMeseroException e) {
+                            e.printStackTrace();
+                        }
+
                         break;
 
                     case 2:
-                        System.out.println("\nNombre actual: "+arrMeseros.get(mesero-1).getNombre());
-                        System.out.println("\nCual sera el nuevo nombre?");
-                        String nuevo = sc.nextLine();
-                        arrMeseros.get(mesero-1).setNombre(nuevo);
-                        System.out.println("\nModificacion exitosa:");
-                        System.out.println("Nombre actual: "+arrMeseros.get(mesero-1).getNombre());
+                        try {
+                            System.out.println("\nNombre actual: "+arrMeseros.get(mesero-1).getNombre());
+                            System.out.println("\nCual sera el nuevo nombre? (no digitos, primera letra mayuscula)");
+                            sc.nextLine();
+                            String nuevo = sc.nextLine();
+                            arrMeseros.get(mesero-1).setNombre(nuevo);
+                            System.out.println("\nModificacion exitosa:");
+                            System.out.println("Nombre actual: "+arrMeseros.get(mesero-1).getNombre());
+                            
+                        } catch (NombreException e) {
+                            e.printStackTrace();
+                        } 
+                        
                         break;
 
                     case 3:
-                        System.out.println("\nEdad actual: "+arrMeseros.get(mesero-1).getEdad());
-                        System.out.println("\nCual sera la edad nueva?");
-                        int nueva = sc.nextInt();
-                        arrMeseros.get(mesero-1).setEdad(nueva);
-                        System.out.println("\nModificacion exitosa:");
-                        System.out.println("Edad actual: "+arrMeseros.get(mesero-1).getEdad());
+                        try {
+                            System.out.println("\nEdad actual: "+arrMeseros.get(mesero-1).getEdad());
+                            System.out.println("\nCual sera la edad nueva? (mayor a 0 y menor a 100 años, no letras)");
+                            sc.nextLine();
+                            String nueva = sc.nextLine();
+                            arrMeseros.get(mesero-1).setEdad(nueva);
+                            System.out.println("\nModificacion exitosa:");
+                            System.out.println("Edad actual: "+arrMeseros.get(mesero-1).getEdad());
+                            
+                        } catch (EdadException e) {
+                            e.printStackTrace();
+                        } 
+                        
                         break;
 
                     case 4:
-                        System.out.println("\nSexo actual: "+arrMeseros.get(mesero-1).getSexo());
-                        System.out.println("\nCual sera el nuevo sexo?");
-                        String nuevoS = sc.nextLine();
-                        arrMeseros.get(mesero-1).setSexo(nuevoS);
-                        System.out.println("\nModificacion exitosa:");
-                        System.out.println("Sexo actual: "+arrMeseros.get(mesero-1).getSexo());
+                        try {
+                            System.out.println("\nSexo actual: "+arrMeseros.get(mesero-1).getSexo());
+                            System.out.println("\nCual sera el nuevo sexo? (M o F)");
+                            sc.nextLine();
+                            String nuevoS = sc.nextLine();
+                            arrMeseros.get(mesero-1).setSexo(nuevoS);
+                            System.out.println("\nModificacion exitosa:");
+                            System.out.println("Sexo actual: "+arrMeseros.get(mesero-1).getSexo());
+                            
+                        } catch (SexoException e) {
+                            e.printStackTrace();
+                        }
+                        
                         break;
 
                     case 5:
-                        System.out.println("\nTelefono actual: "+arrMeseros.get(mesero-1).getTelefono());
-                        System.out.println("\nCual sera el nuevo telefono?");
-                        long nuevoT = sc.nextInt();
-                        arrMeseros.get(mesero-1).setTelefono(nuevoT);
-                        System.out.println("\nModificacion exitosa:");
-                        System.out.println("Telefono actual: "+arrMeseros.get(mesero-1).getTelefono());
+                        try {
+                            System.out.println("\nTelefono actual: "+arrMeseros.get(mesero-1).getTelefono());
+                            System.out.println("\nCual sera el nuevo telefono? (10 digitos, no letras)");
+                            sc.nextLine();
+                            String nuevoT = sc.nextLine();
+                            arrMeseros.get(mesero-1).setTelefono(nuevoT);
+                            System.out.println("\nModificacion exitosa:");
+                            System.out.println("Telefono actual: "+arrMeseros.get(mesero-1).getTelefono());
+                            
+                        } catch (TelefonoException e) {
+                            e.printStackTrace();
+                        }
+                        
                         break;
 
                     default:

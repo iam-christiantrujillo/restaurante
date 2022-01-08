@@ -50,7 +50,7 @@ public class Restaurante{
                 
             }else{
                 archivoA.createNewFile();
-                Administrador adminDefault = new Administrador("raul123", "hola123","Raul", 20, "M", 5545656776l);
+                Administrador adminDefault = new Administrador("raul123", "hola123","Raul", 20, "M", 5576901213l);
                 arrAdmin.add(adminDefault);
             }
 
@@ -66,11 +66,6 @@ public class Restaurante{
 
                 meserosR.addAll(arrMeseros);
 
-                // for(Mesero mesero : arrMeseros){
-                //     if(mesero.getAtendiendo()==true){
-                //         mesero.setAtendiendo(false);
-                //     }
-                // }
                 s.close();
                 
             }else{
@@ -87,13 +82,6 @@ public class Restaurante{
                     arrMesas.add((Mesa) mesas.get(i));
                 }
                 mesasR.addAll(arrMesas);
-
-                // for(Mesa mesa : arrMesas){
-                //     if(mesa.getOcupada()==true){
-                //         ocupadas.add(mesa);
-                //         mesa.setMeseroACargo((Mesero) mesa.getMeseroACargo());
-                //     }
-                // }
 
                 s.close();
                 

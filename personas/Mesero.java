@@ -1,4 +1,5 @@
 package personas;
+import excepciones.*;
 
 
 public class Mesero extends Persona {
@@ -6,6 +7,10 @@ public class Mesero extends Persona {
     private boolean atendiendo = false;
     private int ventasTotales=0;
     private int numPlatillosV=0;
+
+    public Mesero(){
+
+    }
     
     public Mesero(String userName, String passW,int numMesero,String nombre, int edad, String sexo, long telefono){
         super(userName, passW, nombre, edad, sexo, telefono);
@@ -16,8 +21,19 @@ public class Mesero extends Persona {
         return numMesero;
     }
 
-    public void setNumMesero(int nuevo){
-        this.numMesero=nuevo;
+    public void setNumMesero(String nuevo) throws NumeroMeseroException{
+        int number;
+        if(nuevo.length()!=3){
+            throw new NumeroMeseroException();
+        }else{
+            try {
+                number = Integer.parseInt(nuevo);
+                this.numMesero=number;
+            } catch (NumberFormatException e) {
+                throw new NumeroMeseroException();
+            }
+        }
+        
     }
 
     public boolean getAtendiendo(){
