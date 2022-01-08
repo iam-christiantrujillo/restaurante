@@ -3,12 +3,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Mole extends Platillo{
+    private static int precio = 180;
     private static int ventas=0;
     private ArrayList<String> ingredientes = new ArrayList<String>();
 
+    public static void mostrarIngredientesD(){
+        System.out.println("\tIngredientes: Pollo, Chile ancho, Chile mulato, Chile pasilla\n");
+    }
 
     public ArrayList<String> getIngredientes(){
         return this.ingredientes;
+    }
+
+    public static int getPrecio(){
+        return precio;
     }
 
     public static int getVentas(){
@@ -20,7 +28,6 @@ public class Mole extends Platillo{
     }
 
     public Mole(){
-        super(70);
         Scanner sc = new Scanner(System.in);
         boolean paso = false;
 
@@ -45,6 +52,12 @@ public class Mole extends Platillo{
         ingredientes.add("Chile mulato");
         ingredientes.add("Chile pasilla");
     }
+
+    public void mostrarHistoria(){
+        System.out.println("\n------------ Dato curioso -----------");
+        System.out.println("Se cree que el Mole fue creado en el Convento de Santa Rosa en el año 1681 por Sor Andrea de la Asuncion. Segun cuentan en el convento, la monja creo el mole con inspiracion divina.");
+        System.out.println("-------------------------------------\n");
+    }
     
     public void mostrarInfo(){
         System.out.println("\t-----> Mole");
@@ -54,6 +67,6 @@ public class Mole extends Platillo{
             contador++;
             System.out.println("\t"+contador + ". " + ingrediente);
         }
-        System.out.println("\tPrecio: $" + this.getPrecio());
+        System.out.println("\tPrecio: $" + Mole.getPrecio());
     }
 }

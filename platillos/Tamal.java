@@ -3,11 +3,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Tamal extends Platillo{
+    private static int precio = 80;
     private static int ventas=0;
     private ArrayList<String> ingredientes = new ArrayList<String>();
 
+    public static void mostrarIngredientesD(){
+        System.out.println("\tIngredientes: Carne al gusto, Masa de tamal\n");
+    }
+
     public ArrayList<String> getIngredientes(){
         return this.ingredientes;
+    }
+
+    public static int getPrecio(){
+        return precio;
     }
 
     public static int getVentas(){
@@ -19,7 +28,7 @@ public class Tamal extends Platillo{
     }
 
     public Tamal(){
-        super(40);
+        
         Scanner sc = new Scanner(System.in);
         boolean paso = false;
 
@@ -46,7 +55,13 @@ public class Tamal extends Platillo{
                     System.out.println("\nOpcion no valida");
             }
         }
-        ingredientes.add("Masa");
+        ingredientes.add("Masa de tamal");
+    }
+
+    public void mostrarHistoria(){
+        System.out.println("\n------------ Dato curioso -----------");
+        System.out.println("El Tamal es un platillo que se remonta a la epoca prehispanica de Mexico, se dice que eran un alimento para las grandes fiestas, tambien se preparaban para agradecer la fertilidad de la tierra, en cualquier evento social y como ofrenda a los muertos.");
+        System.out.println("-------------------------------------\n");
     }
     
     public void mostrarInfo(){
@@ -57,6 +72,6 @@ public class Tamal extends Platillo{
             contador++;
             System.out.println("\t"+contador + ". " + ingrediente);
         }
-        System.out.println("\tPrecio: $" + this.getPrecio());
+        System.out.println("\tPrecio: $" + Tamal.getPrecio());
     }
 }

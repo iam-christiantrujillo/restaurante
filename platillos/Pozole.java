@@ -3,11 +3,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Pozole extends Platillo{
+    private static int precio = 136;
     private static int ventas=0;
     private ArrayList<String> ingredientes = new ArrayList<String>();
 
+    public static void mostrarIngredientesD(){
+        System.out.println("\tIngredientes: Carne al gusto, Rabanos, Lechuga, Maiz, Oregano\n");
+    }
+
     public ArrayList<String> getIngredientes(){
         return this.ingredientes;
+    }
+
+    public static int getPrecio(){
+        return precio;
     }
 
     public static int getVentas(){
@@ -19,7 +28,6 @@ public class Pozole extends Platillo{
     }
 
     public Pozole(){
-        super(50);
         Scanner sc = new Scanner(System.in);
 
         boolean paso = false;
@@ -51,6 +59,13 @@ public class Pozole extends Platillo{
         ingredientes.add("Rabanos");
         ingredientes.add("Lechuga");
         ingredientes.add("Maiz");
+        ingredientes.add("Oregano");
+    }
+
+    public void mostrarHistoria(){
+        System.out.println("\n------------ Dato curioso -----------");
+        System.out.println("Se cree que el Pozole era consumido desde antes de la conquista, el emperador Moctezuma disfrutaba de un platillo de Pozole ofrendado al dios Xipe Totec, señor de la fertilidad y la regeneracion del maiz y la guerra.");
+        System.out.println("-------------------------------------\n");
     }
     
     public void mostrarInfo(){
@@ -61,7 +76,7 @@ public class Pozole extends Platillo{
             contador++;
             System.out.println("\t"+contador + ". " + ingrediente);
         }
-        System.out.println("\tPrecio: $" + this.getPrecio());
+        System.out.println("\tPrecio: $" + Pozole.getPrecio());
     }
     
 }

@@ -44,22 +44,6 @@ public class Mesero extends Persona {
         this.numPlatillosV+=aSumar;
     }
 
-    public  void crearOrden(){
-
-    }
-    public  void verDispoMesas(){
-
-    }
-    public  void verMesasOcup(){
-
-    }
-    public  void facturar(){
-
-    }
-    public  void verEstadisticas(){
-
-    }
-
     public void mostrarInfo(){
         System.out.println("--------> Mesero");
         System.out.println("Numero de identificacion: "+this.getNumMesero());

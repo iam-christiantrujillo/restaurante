@@ -6,22 +6,6 @@ public class Administrador extends Persona {
         super(userName, passW, nombre, edad, sexo, telefono);
     }
 
-    public  void crearOrden(){
-
-    }
-    public  void verDispoMesas(){
-
-    }
-    public  void verMesasOcup(){
-
-    }
-    public  void facturar(){
-
-    }
-    public  void verEstadisticas(){
-
-    }
-
     public void mostrarInfo(){
         System.out.println("--------> Administrador");
         System.out.println("Nombre: "+this.getNombre());

@@ -131,7 +131,7 @@ public class Metodos {
                 System.out.println("\nMesero con numero " + contador + ":");
                 System.out.println("Nombre: "+usermesero.getNombre());
                 System.out.println("Numero de identificacion: "+usermesero.getNumMesero());
-                System.out.println("Ventas totales: "+usermesero.getVentasTotales());
+                System.out.println("Ventas totales: $"+usermesero.getVentasTotales());
                 contador++;
             }
         }
@@ -140,13 +140,13 @@ public class Metodos {
     public static void mostrarVentasMesas(ArrayList<Mesa> arrMesas){
         
         if(arrMesas.size()==0){
-            System.out.println("\nNo hay meseros registrados");
+            System.out.println("\nNo hay mesas registrados");
         }else{
             int contador = 1;
             for(Mesa mesa : arrMesas){
                 System.out.println("\nMesa " + contador + ":");
                 System.out.println("Numero de mesa: "+mesa.getNumMesa());
-                System.out.println("Ventas totales: "+mesa.getVentasTotales());
+                System.out.println("Ventas totales: $"+mesa.getVentasTotales());
                 contador++;
             }
         }
@@ -224,8 +224,8 @@ public class Metodos {
         MeserosD = meserosR;
         MeserosD.removeAll(MeserosO);
 
-        if(disponibles.size() == 0){
-            System.out.println("\nTodas las mesas estan ocupadas");
+        if(disponibles.size() == 0 || MeserosD.size()==0){
+            System.out.println("\nTodos los meseros o mesas no estan disponibles.");
 
         }else{
             Scanner sc = new Scanner(System.in);
@@ -234,14 +234,14 @@ public class Metodos {
             Metodos.mostrarMesasD(mesasR, disponibles, ocupadas);
             int numM=sc.nextInt();
 
-            if(numM <= arrMesas.size() & numM !=0){
+            if(numM <= arrMesas.size() && numM !=0){
 
                 if(disponibles.contains(arrMesas.get(numM-1))){
                     System.out.println("\nCual es el numero del mesero que estara a cargo de atender la mesa?");
                     Metodos.mostrarMeserosD(meserosR, MeserosD, MeserosO);
                     int numMesero=sc.nextInt();
                     
-                    if(numMesero <= MeserosD.size() & numMesero != 0){
+                    if(numMesero <= MeserosD.size() && numMesero != 0){
                         
                         System.out.println("\nIngrese la orden");
                         Orden ordenM = new Orden();
@@ -251,43 +251,53 @@ public class Metodos {
                         
                         do{
                             System.out.println("\n------> Menu ");
-                            System.out.println("1) Pozole");
-                            System.out.println("2) Mole");
-                            System.out.println("3) Queso Relleno");
-                            System.out.println("4) Tamal");
-                            System.out.println("5) Chile en Nogada");
+                            System.out.println("1) Pozole $" + Pozole.getPrecio());
+                            Pozole.mostrarIngredientesD();
+                            System.out.println("2) Mole $" + Mole.getPrecio());
+                            Mole.mostrarIngredientesD();
+                            System.out.println("3) Queso Relleno $" + QuesoRelleno.getPrecio());
+                            QuesoRelleno.mostrarIngredientesD();
+                            System.out.println("4) Tamal $" + Tamal.getPrecio());
+                            Tamal.mostrarIngredientesD();
+                            System.out.println("5) Chile en Nogada $" + ChileNogada.getPrecio());
+                            ChileNogada.mostrarIngredientesD();
                             System.out.println("6) Terminar orden");
                             opc = sc.nextInt();
         
                             switch(opc){
                                 case 1: 
-                                    Pozole pozole= new Pozole();
-                                    precioTotal+=pozole.getPrecio();
-                                    Pozole.setVentas(pozole.getPrecio());
+                                    Platillo pozole= new Pozole();
+                                    pozole.mostrarHistoria();
+                                    precioTotal+=Pozole.getPrecio();
+                                    Pozole.setVentas(Pozole.getPrecio());
                                     ordenM.getArrOrden().add(pozole);
                                     break;
                                 case 2: 
-                                    Mole mole= new Mole();
-                                    precioTotal+=mole.getPrecio();
-                                    Mole.setVentas(mole.getPrecio());
+                                    Platillo mole= new Mole();
+                                    mole.mostrarHistoria();
+                                    precioTotal+=Mole.getPrecio();
+                                    Mole.setVentas(Mole.getPrecio());
                                     ordenM.getArrOrden().add(mole);
                                     break;
                                 case 3: 
-                                    QuesoRelleno quesoR= new QuesoRelleno();
-                                    precioTotal+=quesoR.getPrecio();
-                                    QuesoRelleno.setVentas(quesoR.getPrecio());
+                                    Platillo quesoR= new QuesoRelleno();
+                                    quesoR.mostrarHistoria();
+                                    precioTotal+=QuesoRelleno.getPrecio();
+                                    QuesoRelleno.setVentas(QuesoRelleno.getPrecio());
                                     ordenM.getArrOrden().add(quesoR);
                                     break;
                                 case 4: 
-                                    Tamal tamal= new Tamal();
-                                    precioTotal+=tamal.getPrecio();
-                                    Tamal.setVentas(tamal.getPrecio());
+                                    Platillo tamal= new Tamal();
+                                    tamal.mostrarHistoria();
+                                    precioTotal+=Tamal.getPrecio();
+                                    Tamal.setVentas(Tamal.getPrecio());
                                     ordenM.getArrOrden().add(tamal);
                                     break;
                                 case 5: 
-                                    ChileNogada chile= new ChileNogada();
-                                    precioTotal+=chile.getPrecio();
-                                    ChileNogada.setVentas(chile.getPrecio());
+                                    Platillo chile= new ChileNogada();
+                                    chile.mostrarHistoria();
+                                    precioTotal+=ChileNogada.getPrecio();
+                                    ChileNogada.setVentas(ChileNogada.getPrecio());
                                     ordenM.getArrOrden().add(chile);
                                     break;
                                 case 6: 
@@ -339,7 +349,7 @@ public class Metodos {
             Metodos.mostrarMesasO(ocupadas);
             int numM=sc.nextInt();
 
-            if(numM <= arrMesas.size() & numM !=0){
+            if(numM <= arrMesas.size() && numM !=0){
 
                 if(ocupadas.contains(arrMesas.get(numM-1))){
 
@@ -356,7 +366,7 @@ public class Metodos {
                             System.out.println("Subtotal: $" + arrMesas.get(numM-1).getOrdenMesa().getPrecioOrden());
                             float iva = (arrMesas.get(numM-1).getOrdenMesa().getPrecioOrden() * 16f) / 100f;
                             System.out.println("IVA 16%: $" + iva);
-                            int propina = 100;
+                            int propina = 50;
                             System.out.println("Propina: $" + propina);
                             System.out.println("Metodo de pago: Pago en efectivo");
                             float total = arrMesas.get(numM-1).getOrdenMesa().getPrecioOrden() + iva + propina;
@@ -375,7 +385,7 @@ public class Metodos {
                             System.out.println("Subtotal: $" + arrMesas.get(numM-1).getOrdenMesa().getPrecioOrden());
                             float iva = (arrMesas.get(numM-1).getOrdenMesa().getPrecioOrden() * 16f) / 100f;
                             System.out.println("IVA 16%: $" + iva);
-                            int propina = 100;
+                            int propina = 50;
                             System.out.println("Propina: $" + propina);
                             System.out.println("Metodo de pago: Tarjeta de credito");
                             System.out.println("Numero de tarjeta: " + numT);
